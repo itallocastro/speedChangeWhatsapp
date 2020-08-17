@@ -1,8 +1,7 @@
 let audios;
 function getAudios(value) {
-    if(!audios) {
-        audios = document.querySelectorAll('audio');
-    }
+
+    audios = document.querySelectorAll('audio');
     for (const audio of audios) {
         audio.playbackRate = value;
     }
