@@ -1,16 +1,20 @@
-let audios;
+let audios = [];
 let value = 1;
+let intervalAudios;
+function changeValue(value) {
+    for (const audio of audios) {
+        audio.playbackRate = value;
+    }
+}
 function getAudios(value) {
-
-    const interval = setInterval(() => {
-        audios = document.querySelectorAll('audio');
-        if(audios.length > 0) {
-            clearInterval(interval);
-            for (const audio of audios) {
-                audio.playbackRate = value;
-                // console.log(value);
-            }
+    intervalAudios = setInterval(() => {
+        const newAudios = document.querySelectorAll('audio');
+        if(newAudios.length > audios.length) {
+            audios = newAudios;
+            changeValue(value);
+            console.log(audios.length);
         }
+        // audios = document.querySelectorAll('audio');
     }, 1000);
 }
 function removeActives() {
@@ -22,7 +26,9 @@ function removeActives() {
 function addEventTalk(talks) {
     for (let i = 0; i < talks.length ; i++) {
         talks[i].addEventListener('click', () => {
-           getAudios(value);
+            audios = [];
+            clearInterval(intervalAudios);
+            getAudios(value);
         });
     }
 }
@@ -40,7 +46,7 @@ const interval = setInterval(() => {
             removeActives();
             button2x.classList.add('active');
             value = 2;
-            getAudios(value);
+            changeValue(value);
         });
         const button15x = document.createElement('button');
         button15x.innerHTML = '1.5x';
@@ -49,7 +55,7 @@ const interval = setInterval(() => {
             removeActives()
             button15x.classList.add('active');
             value = 1.5;
-            getAudios(value);
+            changeValue(value);
         });
         const button125x = document.createElement('button');
         button125x.innerHTML = '1.25x';
@@ -58,7 +64,7 @@ const interval = setInterval(() => {
             removeActives()
             button125x.classList.add('active');
             value = 1.25;
-            getAudios(value);
+            changeValue(value);
         });
         const button1x = document.createElement('button');
         button1x.innerHTML = '1x';
@@ -67,7 +73,7 @@ const interval = setInterval(() => {
             removeActives()
             button1x.classList.add('active');
             value = 1;
-            getAudios(value);
+            changeValue(value);
         });
 
         header.appendChild(button2x);
