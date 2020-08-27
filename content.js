@@ -12,7 +12,7 @@ function getAudios(value) {
         if(newAudios.length > audios.length) {
             audios = newAudios;
             changeValue(value);
-            console.log(audios.length);
+            // console.log(audios.length);
         }
         // audios = document.querySelectorAll('audio');
     }, 1000);
